@@ -236,21 +236,27 @@ footer { background: #061020; color: #64748b; text-align: center; padding: 30px 
 .delay-2 { transition-delay: 0.4s; }
 
 /* --- Responsive Queries --- */
-@media (max-width: 992px) { 
-    .contact-wrapper { grid-template-columns: 1fr; } 
-    .map-container { min-height: 300px; } 
-    .hero h1 { font-size: 3rem; } 
-}
-
+@media (max-width: 992px) { .contact-wrapper { grid-template-columns: 1fr; } .map-container { min-height: 300px; } .hero h1 { font-size: 3rem; } }
 @media (max-width: 768px) {
-    /* --- NEW FIXES FOR MOBILE HEADER OVERLAP --- */
-    .nav-container { padding: 10px 15px; }
-    .logo { font-size: 1.15rem; }
-    .hero { min-height: auto; padding: 140px 15px 50px; }
+    /* --- HEADER HEIGHT & 1-LINE LOGO FIX --- */
+    .nav-container { 
+        padding: 10px 15px; 
+    }
+    .logo { 
+        font-size: 1rem; /* Smaller font to fit the screen */
+        white-space: nowrap; /* STRICTLY FORCES ONE LINE */
+    }
+    .hamburger { 
+        display: flex; 
+        transform: scale(0.85); /* Slightly scales down the menu icon to save space */
+    }
+    .hero { 
+        min-height: auto; 
+        padding: 100px 15px 50px; /* Reduced top padding since navbar is now much thinner */
+    }
     /* ------------------------------------------- */
 
     /* Mobile Navigation Settings */
-    .hamburger { display: flex; }
     .nav-links {
         position: absolute; top: 100%; left: -100%; width: 100%; background: white;
         flex-direction: column; padding: 30px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1); transition: 0.4s;
