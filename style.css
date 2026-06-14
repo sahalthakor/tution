@@ -243,7 +243,13 @@ footer { background: #061020; color: #64748b; text-align: center; padding: 30px 
 }
 
 @media (max-width: 768px) {
-    /* Mobile Navigation */
+    /* --- NEW FIXES FOR MOBILE HEADER OVERLAP --- */
+    .nav-container { padding: 10px 15px; }
+    .logo { font-size: 1.15rem; }
+    .hero { min-height: auto; padding: 140px 15px 50px; }
+    /* ------------------------------------------- */
+
+    /* Mobile Navigation Settings */
     .hamburger { display: flex; }
     .nav-links {
         position: absolute; top: 100%; left: -100%; width: 100%; background: white;
@@ -251,37 +257,12 @@ footer { background: #061020; color: #64748b; text-align: center; padding: 30px 
     }
     .nav-links.active { left: 0; }
     
-    /* --- Smaller Mobile Header Updates --- */
-    .hero { 
-        min-height: auto; 
-        padding: 100px 15px 50px; 
-    } 
-    .glass-card { 
-        padding: 30px 15px; 
-    }
-    .badge {
-        font-size: 1rem; 
-        padding: 5px 20px;
-        margin-bottom: 15px;
-    }
-    .hero h1 { 
-        font-size: 2.1rem; 
-        margin-bottom: 15px;
-    }
-    .subtitle { 
-        font-size: 1rem; 
-        margin-bottom: 25px; 
-    }
-    .hero-highlights { 
-        flex-direction: column; gap: 10px; 
-        margin-bottom: 25px;
-    }
-    .highlight {
-        padding: 8px 15px;
-        font-size: 0.95rem; 
-    }
-    .cta-button {
-        padding: 14px 30px; 
-        font-size: 1.1rem;
-    }
+    /* Remaining Mobile Adjustments */
+    .glass-card { padding: 30px 15px; }
+    .badge { font-size: 1rem; padding: 5px 20px; margin-bottom: 15px; }
+    .hero h1 { font-size: 2.1rem; margin-bottom: 15px; }
+    .subtitle { font-size: 1rem; margin-bottom: 25px; }
+    .hero-highlights { flex-direction: column; gap: 10px; margin-bottom: 25px; }
+    .highlight { padding: 8px 15px; font-size: 0.95rem; }
+    .cta-button { padding: 14px 30px; font-size: 1.1rem; }
 }
