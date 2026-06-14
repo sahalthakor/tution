@@ -62,13 +62,34 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.target == modal) closeModal();
     });
 
-    // Form Submit Simulation
+ // --- Form Submit to WhatsApp Logic ---
     if(form) {
         form.addEventListener("submit", function(e) {
-            e.preventDefault(); 
+            e.preventDefault(); // Prevents the page from reloading
+            
+            // 1. Get the values the user typed in
+            const name = document.getElementById('studentName').value;
+            const phone = document.getElementById('studentPhone').value;
+            const std = document.getElementById('studentStd').value;
+
+            // 2. Construct the message for WhatsApp
+            const message = `Hello Thakor Tuition Classes! 🎓\nI would like to inquire about admission.\n\n*Student Name:* ${name}\n*Contact Number:* ${phone}\n*Standard:* ${std}`;
+            
+            // 3. Encode the message so it works in a web link
+            const encodedMessage = encodeURIComponent(message);
+            
+            // 4. Create the WhatsApp URL with Mehjabin's number (+919081819186)
+            const whatsappNumber = "916354240130";
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // 5. Open WhatsApp in a new tab or the mobile app
+            window.open(whatsappURL, '_blank');
+
+            // 6. Show a brief redirecting message, then close the modal
             form.style.display = "none";
             successMsg.classList.remove("hidden");
-            setTimeout(closeModal, 3500); // Auto close after 3.5s
+            
+            setTimeout(closeModal, 3000); // Auto close modal after 3 seconds
         });
     }
 
