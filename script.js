@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Toggle menu on click
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        // Transform hamburger to 'X'
         hamburger.classList.toggle('toggle');
     });
 
@@ -31,14 +30,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // --- 3. MODAL (POPUP) LOGIC ---
+    // --- 3. MODAL & WHATSAPP LOGIC ---
     const modal = document.getElementById("enrollModal");
     const openBtns = [document.getElementById("openModalBtn"), document.getElementById("navEnrollBtn")];
     const closeBtn = document.querySelector(".close-btn");
     const form = document.getElementById("enrollmentForm");
     const successMsg = document.getElementById("successMessage");
 
-    // Open Modal (From Hero or Nav)
+    // Open Modal
     openBtns.forEach(btn => {
         if(btn) {
             btn.addEventListener("click", () => {
@@ -62,34 +61,48 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.target == modal) closeModal();
     });
 
- // --- Form Submit to WhatsApp Logic ---
+    // Form Submit to WhatsApp
     if(form) {
         form.addEventListener("submit", function(e) {
-            e.preventDefault(); // Prevents the page from reloading
+            e.preventDefault(); // Prevents page reload
             
-            // 1. Get the values the user typed in
-            const name = document.getElementById('studentName').value;
-            const phone = document.getElementById('studentPhone').value;
-            const std = document.getElementById('studentStd').value;
+            try {
+                // Get elements
+                const nameInput = document.getElementById('studentName');
+                const phoneInput = document.getElementById('studentPhone');
+                const stdInput = document.getElementById('studentStd');
 
-            // 2. Construct the message for WhatsApp
-            const message = `Hello Thakor Tuition Classes! 🎓\nI would like to inquire about admission.\n\n*Student Name:* ${name}\n*Contact Number:* ${phone}\n*Standard:* ${std}`;
-            
-            // 3. Encode the message so it works in a web link
-            const encodedMessage = encodeURIComponent(message);
-            
-            // 4. Create the WhatsApp URL with Mehjabin's number (+919081819186)
-            const whatsappNumber = "916354240130";
-            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                // Error check to ensure inputs exist
+                if (!nameInput || !phoneInput || !stdInput) {
+                    alert("Form configuration error. Please contact the administrator.");
+                    return;
+                }
 
-            // 5. Open WhatsApp in a new tab or the mobile app
-            window.open(whatsappURL, '_blank');
+                // Get values
+                const name = nameInput.value;
+                const phone = phoneInput.value;
+                const std = stdInput.value;
 
-            // 6. Show a brief redirecting message, then close the modal
-            form.style.display = "none";
-            successMsg.classList.remove("hidden");
-            
-            setTimeout(closeModal, 3000); // Auto close modal after 3 seconds
+                // Construct message
+                const message = `Hello Thakor Tuition Classes! 🎓\nI would like to inquire about admission.\n\n*Student Name:* ${name}\n*Contact Number:* ${phone}\n*Standard:* ${std}`;
+                const encodedMessage = encodeURIComponent(message);
+                
+                // --- WHATSAPP NUMBER ---
+                const whatsappNumber = "916354240130"; 
+                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                
+                // Open WhatsApp link
+                window.open(whatsappURL, '_blank');
+
+                // Hide form, show success message, close modal
+                form.style.display = "none";
+                successMsg.classList.remove("hidden");
+                setTimeout(closeModal, 3500); 
+
+            } catch (error) {
+                console.error("Form Error:", error);
+                alert("Something went wrong with the form. Please try again.");
+            }
         });
     }
 
@@ -103,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Animate only once
+                observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
